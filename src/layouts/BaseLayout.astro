@@ -7,20 +7,17 @@ import SiteHeader from "../components/SiteHeader.astro";
 interface Props {
   title?: string;
   description?: string;
-  image?: string;
   article?: boolean;
 }
 
 const {
   title,
   description = "Research notes on deep learning, interpretability, and the craft of understanding models.",
-  image = "/og.png",
   article = false,
 } = Astro.props;
 const siteTitle = "Imran Ibrahimli";
 const pageTitle = title ? `${title} — ${siteTitle}` : `${siteTitle} — Research notes`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
-const socialImage = new URL(image, Astro.site);
 ---
 
 <!doctype html>
@@ -38,11 +35,9 @@ const socialImage = new URL(image, Astro.site);
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={socialImage} />
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={socialImage} />
 
     <title>{pageTitle}</title>
   </head>

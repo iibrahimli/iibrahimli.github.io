@@ -60,12 +60,43 @@ Put figures in `public/images/` and reference them from a note with
 
 Drafts are visible during local development and omitted from production builds.
 
+## Public files and short links
+
+GitHub Pages can also serve PDFs, slides, datasets, and other static files. This
+project includes a small helper:
+
+```bash
+npm run add-file -- ~/Desktop/cv.pdf cv
+```
+
+It copies the file to `public/files/cv.pdf` and creates the short link `/cv`.
+After the next deployment, both of these work:
+
+```text
+https://iibrahimli.github.io/cv
+https://iibrahimli.github.io/files/cv.pdf
+```
+
+Use lowercase letters, numbers, and hyphens for short names. The mappings live
+in `src/data/file-links.json`, so they can also be edited by hand.
+
+Every file deployed with GitHub Pages is public. Do not put a sensitive CV,
+private draft, access token, unpublished dataset, or personal document in
+`public/`.
+
+For genuinely private downloads, use a service that supports authentication or
+expiring links—such as a private Google Drive, Dropbox, or Box link; an
+authenticated object store; or Cloudflare Access—and add only that share link
+to the site. GitHub Pages cannot securely implement private file links because
+it has no server-side authentication.
+
 ## Local commands
 
 | Command | Purpose |
 | --- | --- |
 | `npm run dev` | Start the live local preview |
 | `npm run new -- "Title"` | Create a new draft note |
+| `npm run add-file -- /path/to/file.pdf short-name` | Add a public file and short link |
 | `npm run check` | Check content and Astro/TypeScript files |
 | `npm run build` | Make the production site in `dist/` |
 | `npm run preview` | Preview the most recent production build |
@@ -85,22 +116,31 @@ The site uses one simple path from writing to publishing:
 The workflow is in `.github/workflows/deploy.yml`. You do not upload the
 generated `dist/` folder; GitHub builds it from the Markdown and source files.
 
-For the first deployment only, open the repository on GitHub and go to
-**Settings → Pages → Build and deployment → Source**, then choose
-**GitHub Actions**. Later pushes to `main` deploy automatically. Deployment
-progress and logs appear in the repository’s **Actions** tab.
+For the first deployment only:
+
+1. Open the repository on GitHub and go to **Settings**.
+2. Under **Default branch**, choose `main`, click **Update**, and confirm.
+3. Return to the repository, open the branch menu, choose **View all branches**,
+   and delete `master`.
+4. Go to **Settings → Pages → Build and deployment → Source** and choose
+   **GitHub Actions**.
+5. Open **Actions → Deploy to GitHub Pages** and run the workflow, or push a new
+   commit to `main`.
+
+Later pushes to `main` deploy automatically. Deployment progress and logs
+appear in the repository’s **Actions** tab.
 
 ## Site structure
 
 ```text
 src/
   content/notes/      Markdown posts
-  components/         Reusable page pieces and figures
+  components/         Reusable page pieces
   layouts/            Site and article layouts
   pages/              Home, archive, about, RSS, and article routes
   styles/global.css   The visual system
 experiments/          Reproducible code and recorded results
-public/               Static files such as images and social previews
+public/               Public images and downloadable files
 ```
 
 The homepage, archive, RSS feed, related-note links, dates, and metadata are

@@ -1,0 +1,25 @@
+---
+import fileLinks from "../data/file-links.json";
+
+export function getStaticPaths() {
+  return Object.entries(fileLinks).map(([slug, target]) => ({
+    params: { slug },
+    props: { target },
+  }));
+}
+
+const target = String(Astro.props.target);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="refresh" content={`0;url=${target}`} />
+    <link rel="canonical" href={target} />
+    <title>Opening file…</title>
+  </head>
+  <body>
+    <p><a href={target}>Open the file</a></p>
+  </body>
+</html>

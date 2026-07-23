@@ -9,10 +9,11 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build && node scripts/prepare-sites-build.mjs",
+    "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "new": "node scripts/new-post.mjs"
+    "new": "node scripts/new-post.mjs",
+    "add-file": "node scripts/add-file.mjs"
   },
   "dependencies": {
     "@astrojs/markdown-remark": "7.2.1",

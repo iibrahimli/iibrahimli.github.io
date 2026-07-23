@@ -13,7 +13,6 @@ const notes = defineCollection({
     draft: z.boolean().default(false),
     featured: z.boolean().default(false),
     readingMinutes: z.number().int().positive().optional(),
-    figure: z.enum(["spectral-bias"]).optional(),
   }),
 });
 

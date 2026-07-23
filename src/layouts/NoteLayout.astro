@@ -3,7 +3,6 @@ import type { CollectionEntry } from "astro:content";
 import { getCollection } from "astro:content";
 import BaseLayout from "./BaseLayout.astro";
 import NoteList from "../components/NoteList.astro";
-import SpectralChart from "../components/SpectralChart.astro";
 import { formatDate, visibleNotes } from "../lib/notes";
 
 interface Props {
@@ -31,8 +30,6 @@ const related = allNotes.filter((candidate) => candidate.id !== note.id).slice(0
         {note.data.updated && <span>Updated {formatDate(note.data.updated)}</span>}
       </div>
     </header>
-
-    {note.data.figure === "spectral-bias" && <SpectralChart />}
 
     <div class="note-body">
       <slot />

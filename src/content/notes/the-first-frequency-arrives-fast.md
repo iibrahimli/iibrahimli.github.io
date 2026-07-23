@@ -8,7 +8,6 @@ tags:
   - Reproductions
 featured: true
 readingMinutes: 8
-figure: spectral-bias
 ---
 
 Neural networks can represent very complicated functions. That fact says
