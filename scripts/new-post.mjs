@@ -4,7 +4,7 @@ import { join } from "node:path";
 const title = process.argv.slice(2).join(" ").trim();
 
 if (!title) {
-  console.error('Usage: npm run new -- "Your post title"');
+  console.error('Usage: npm run new -- "Your note title"');
   process.exit(1);
 }
 
@@ -16,38 +16,19 @@ const slug = title
   .replace(/[\s_]+/g, "-")
   .replace(/-+/g, "-");
 
-if (!slug) {
-  console.error("The title must contain at least one letter or number.");
-  process.exit(1);
-}
-
 const today = new Date().toISOString().slice(0, 10);
 const directory = join(process.cwd(), "src", "content", "notes");
 const path = join(directory, `${slug}.md`);
 const safeTitle = title.replaceAll('"', '\\"');
 const template = `---
 title: "${safeTitle}"
-description: "One-sentence summary for the homepage and link previews."
+description: "A short summary."
 published: ${today}
-tags:
-  - Deep learning
+tags: []
 draft: true
-readingMinutes: 5
 ---
 
-Start with the question or observation.
-
-## Setup
-
-Describe the model, data, metric, and the choice you are testing.
-
-## Finding
-
-State what happened, with enough evidence to evaluate it.
-
-## What I think it means
-
-Separate observation from interpretation, and list the important limitations.
+TODO
 `;
 
 await mkdir(directory, { recursive: true });

@@ -1,25 +1,21 @@
 ---
 import { getCollection } from "astro:content";
-import BaseLayout from "../../layouts/BaseLayout.astro";
 import NoteList from "../../components/NoteList.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
 import { visibleNotes } from "../../lib/notes";
 
 const notes = visibleNotes(await getCollection("notes"));
 ---
 
 <BaseLayout
-  title="Research notes"
-  description="Deep-learning research notes, compact experiments, and explanations by Imran Ibrahimli."
+  title="Notes"
+  description="Notes by Imran Ibrahimli on deep learning, research, and related ideas."
 >
-  <section class="page-intro section-shell">
-    <p class="eyebrow">The notebook</p>
-    <h1>Research notes</h1>
-    <p>
-      Experiments and explanations about deep learning, with code, assumptions,
-      and uncertainty left visible.
-    </p>
-  </section>
-  <section class="archive section-shell" aria-label="All research notes">
+  <section class="notes-page section-shell">
+    <header class="notes-intro">
+      <h1>Notes</h1>
+      <p>Research observations, conference notes, and things I want to understand better.</p>
+    </header>
     <NoteList notes={notes} />
   </section>
 </BaseLayout>

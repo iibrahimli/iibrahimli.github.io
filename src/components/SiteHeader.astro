@@ -5,11 +5,10 @@ const path = Astro.url.pathname;
 <header class="site-header">
   <a class="wordmark" href="/" aria-label="Imran Ibrahimli, home">
     <span>Imran Ibrahimli</span>
-    <small>Research notes</small>
   </a>
   <nav aria-label="Primary navigation">
+    <a href="/" aria-current={path === "/" ? "page" : undefined}>About</a>
     <a href="/notes/" aria-current={path.startsWith("/notes") ? "page" : undefined}>Notes</a>
-    <a href="/about/" aria-current={path.startsWith("/about") ? "page" : undefined}>About</a>
-    <a href="/rss.xml">RSS</a>
+    <a href="/files/cv.pdf" target="_blank" rel="noopener">CV</a>
   </nav>
 </header>

@@ -1,22 +1,19 @@
 ---
 import "../styles/global.css";
-import "katex/dist/katex.min.css";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 
 interface Props {
   title?: string;
   description?: string;
-  article?: boolean;
 }
 
 const {
   title,
-  description = "Research notes on deep learning, interpretability, and the craft of understanding models.",
-  article = false,
+  description = "Imran Ibrahimli is a machine learning engineer and researcher interested in deep learning and how neural networks generalize.",
 } = Astro.props;
 const siteTitle = "Imran Ibrahimli";
-const pageTitle = title ? `${title} — ${siteTitle}` : `${siteTitle} — Research notes`;
+const pageTitle = title ? `${title} — ${siteTitle}` : siteTitle;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
 
@@ -28,10 +25,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <link rel="alternate" type="application/rss+xml" title="Imran Ibrahimli’s research notes" href="/rss.xml" />
-    <meta name="theme-color" content="#f7f4ed" />
+    <meta name="theme-color" content="#ffffff" />
 
-    <meta property="og:type" content={article ? "article" : "website"} />
+    <meta property="og:type" content="website" />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
