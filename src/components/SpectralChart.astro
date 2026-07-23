@@ -1,0 +1,45 @@
+---
+const points = [
+  { step: "0", low: -9.56, high: 5.82 },
+  { step: "50", low: 79.45, high: -11.69 },
+  { step: "100", low: 95.38, high: -5.32 },
+  { step: "250", low: 97.36, high: -2.5 },
+  { step: "500", low: 99.15, high: 1.1 },
+  { step: "1k", low: 99.86, high: 3.26 },
+  { step: "2k", low: 99.36, high: 4.61 },
+  { step: "4k", low: 99.04, high: 6.11 },
+];
+---
+
+<figure class="spectral-figure">
+  <div
+    class="spectral-chart"
+    role="img"
+    aria-label="At step 100 the low-frequency coefficient has reached 95 percent of its target, while the high-frequency coefficient remains below zero. By step 4000 the low-frequency coefficient is at 99 percent and the high-frequency coefficient is at 6 percent."
+  >
+    <div class="chart-y-label">coefficient recovered</div>
+    <div class="chart-grid" aria-hidden="true">
+      <span class="grid-line line-100"><b>100%</b></span>
+      <span class="grid-line line-50"><b>50%</b></span>
+      <span class="grid-line line-0"><b>0%</b></span>
+      {points.map((point) => (
+        <div class="chart-group">
+          <div class="bars">
+            <i class="bar low" style={`--value:${Math.max(0, point.low)}`}></i>
+            <i class="bar high" style={`--value:${Math.max(0, point.high)}`}></i>
+          </div>
+          <small>{point.step}</small>
+        </div>
+      ))}
+    </div>
+    <div class="chart-legend" aria-hidden="true">
+      <span><i class="legend-low"></i>sin(x)</span>
+      <span><i class="legend-high"></i>0.3 sin(8x)</span>
+      <span class="axis-label">training step →</span>
+    </div>
+  </div>
+  <figcaption>
+    Recovery of the target Fourier coefficients during training. Negative values
+    are clipped at zero in the chart; the exact values are in the table below.
+  </figcaption>
+</figure>

@@ -1,0 +1,57 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import NoteList from "../components/NoteList.astro";
+import { visibleNotes } from "../lib/notes";
+
+const notes = visibleNotes(await getCollection("notes"));
+const featured = notes.find((note) => note.data.featured) ?? notes[0];
+const remaining = notes.filter((note) => note.id !== featured?.id).slice(0, 4);
+---
+
+<BaseLayout>
+  <section class="hero section-shell">
+    <p class="eyebrow">Deep learning · interpretability · experiments</p>
+    <h1>I write to find out what the model is doing.</h1>
+    <p class="hero-intro">
+      Small, reproducible investigations into learning dynamics, representations,
+      and the gap between a curve that moved and an explanation that holds up.
+    </p>
+  </section>
+
+  {featured && (
+    <section class="featured section-shell" aria-labelledby="featured-title">
+      <p class="eyebrow">Latest note</p>
+      <a class="featured-link" href={`/notes/${featured.id}/`}>
+        <div>
+          <h2 id="featured-title">{featured.data.title}</h2>
+          <p>{featured.data.description}</p>
+        </div>
+        <span aria-hidden="true">Read note ↗</span>
+      </a>
+    </section>
+  )}
+
+  {remaining.length > 0 && (
+    <section class="archive section-shell" aria-labelledby="archive-title">
+      <div class="section-heading">
+        <p class="eyebrow">Notebook</p>
+        <h2 id="archive-title">Recent notes</h2>
+      </div>
+      <NoteList notes={remaining} />
+    </section>
+  )}
+
+  <section class="home-about section-shell">
+    <p class="eyebrow">About this site</p>
+    <div>
+      <h2>Working notes, made public.</h2>
+      <p>
+        These essays favor compact experiments, explicit uncertainty, and enough
+        detail to reproduce the result. I’m interested in why deep learning
+        systems generalize—and when our explanations fail.
+      </p>
+      <a href="/about/">About Imran →</a>
+    </div>
+  </section>
+</BaseLayout>

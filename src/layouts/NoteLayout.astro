@@ -1,0 +1,58 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+import BaseLayout from "./BaseLayout.astro";
+import NoteList from "../components/NoteList.astro";
+import SpectralChart from "../components/SpectralChart.astro";
+import { formatDate, visibleNotes } from "../lib/notes";
+
+interface Props {
+  note: CollectionEntry<"notes">;
+}
+
+const { note } = Astro.props;
+const allNotes = visibleNotes(await getCollection("notes"));
+const related = allNotes.filter((candidate) => candidate.id !== note.id).slice(0, 2);
+---
+
+<BaseLayout
+  title={note.data.title}
+  description={note.data.description}
+  article
+>
+  <article class="note">
+    <header class="note-header">
+      <div class="eyebrow">Research note · {note.data.tags[0] ?? "Deep learning"}</div>
+      <h1>{note.data.title}</h1>
+      <p class="dek">{note.data.description}</p>
+      <div class="note-meta">
+        <time datetime={note.data.published.toISOString()}>{formatDate(note.data.published)}</time>
+        {note.data.readingMinutes && <span>{note.data.readingMinutes} min read</span>}
+        {note.data.updated && <span>Updated {formatDate(note.data.updated)}</span>}
+      </div>
+    </header>
+
+    {note.data.figure === "spectral-bias" && <SpectralChart />}
+
+    <div class="note-body">
+      <slot />
+    </div>
+
+    <footer class="note-end">
+      <p>
+        Corrections and thoughtful disagreement are welcome.
+        <a href="mailto:imran.ibrahimli@gmail.com?subject=Research%20note">Send me a note</a>.
+      </p>
+    </footer>
+  </article>
+
+  {related.length > 0 && (
+    <section class="related section-shell" aria-labelledby="related-title">
+      <div class="section-heading">
+        <p class="eyebrow">Continue reading</p>
+        <h2 id="related-title">Other notes</h2>
+      </div>
+      <NoteList notes={related} />
+    </section>
+  )}
+</BaseLayout>
