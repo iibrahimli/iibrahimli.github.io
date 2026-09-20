@@ -8,6 +8,7 @@ const path = Astro.url.pathname;
   </a>
   <nav aria-label="Primary navigation">
     <a href="/" aria-current={path === "/" ? "page" : undefined}>About</a>
+    <a href="/#publications">Publications</a>
     <a href="/notes/" aria-current={path.startsWith("/notes") ? "page" : undefined}>Notes</a>
     <a href="/files/cv.pdf" target="_blank" rel="noopener">CV</a>
   </nav>

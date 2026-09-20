@@ -1,9 +1,13 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import publicationData from "../data/publications.json";
 import { formatDate, visibleNotes } from "../lib/notes";
 
 const latestNote = visibleNotes(await getCollection("notes"))[0];
+const publications = publicationData.toSorted(
+  (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+);
 ---
 
 <BaseLayout>
@@ -12,6 +16,26 @@ const latestNote = visibleNotes(await getCollection("notes"))[0];
     <p>
       I’m interested in deep learning and understanding how neural networks learn algorithms that generalize.
     </p>
+    <div class="research-interest-groups">
+      <section aria-labelledby="current-interests-heading">
+        <h2 id="current-interests-heading">Current research interests</h2>
+        <ul>
+          <li>Expressivity, compositionality, and systematic generalization</li>
+          <li>Learning soft algorithms with neural networks</li>
+          <li>Looping (depth-recurrent) transformers</li>
+          <li>Mechanistic interpretability</li>
+        </ul>
+      </section>
+      <section aria-labelledby="past-interests-heading">
+        <h2 id="past-interests-heading">Past research interests</h2>
+        <ul>
+          <li>Object detection and semantic segmentation in remote sensing</li>
+          <li>Convolutional neural networks</li>
+          <li>U-Nets</li>
+          <li>YOLO</li>
+        </ul>
+      </section>
+    </div>
     <dl class="about-facts">
       <div>
         <dt>Based in</dt>
@@ -26,17 +50,13 @@ const latestNote = visibleNotes(await getCollection("notes"))[0];
       </div>
       <div>
         <dt>Industry experience</dt>
-        <dd>Research and development, data and ML engineering, MLOps</dd>
-      </div>
-      <div>
-        <dt>Interests</dt>
         <dd>
-          <ul class="interest-list">
-            <li>Expressivity, compositionality, and systematic generalization</li>
-            <li>Learning soft algorithms with neural networks</li>
-            <li>Looping (depth-recurrent) transformers</li>
-            <li>Mechanistic interpretability</li>
-          </ul>
+          <span>Data &amp; ML Consultant @ Netlight Consulting</span>
+          <span>MLOps Engineer (Working Student) @ Merantix Momentum</span>
+          <span>Research Engineer Intern @ Nuance Communications (Microsoft)</span>
+          <span>Founding Engineer @ WeType Inc.</span>
+          <span>ML Engineer @ Space Agency of the Republic of Azerbaijan (Azercosmos)</span>
+          <span>Research Intern @ Space Agency of the Republic of Azerbaijan (Azercosmos)</span>
         </dd>
       </div>
     </dl>
@@ -65,4 +85,56 @@ const latestNote = visibleNotes(await getCollection("notes"))[0];
       </a>
     </section>
   )}
+
+  <section id="publications" class="research section-shell" aria-labelledby="research-heading">
+    <div class="section-heading">
+      <div>
+        <h2 id="research-heading">Publications</h2>
+      </div>
+      <a href="https://scholar.google.com/citations?user=Hl0FjYgAAAAJ&hl=en">
+        Google Scholar ↗
+      </a>
+    </div>
+
+    <ol class="publication-list">
+      {publications.map((publication) => (
+        <li class="publication">
+          <article>
+            <div class="publication-meta">
+              {"type" in publication && publication.type && <>{publication.type} · </>}
+              {publication.venue} · {new Date(publication.date).getUTCFullYear()}
+            </div>
+            <h3>
+              <a href={publication.primaryUrl}>{publication.title}</a>
+            </h3>
+            <p class="publication-authors">
+              {publication.authors.map((author, authorIndex) => (
+                <>
+                  {authorIndex > 0 && (
+                    authorIndex === publication.authors.length - 1
+                      ? publication.authors.length === 2 ? " and " : ", and "
+                      : ", "
+                  )}
+                  {author === "Imran Ibrahimli" ? <strong>{author}</strong> : author}
+                </>
+              ))}
+            </p>
+            <nav class="publication-links" aria-label={`Links for ${publication.title}`}>
+              {publication.links.map((link) => (
+                <a
+                  href={link.url}
+                  target={"newTab" in link && link.newTab ? "_blank" : undefined}
+                  rel={"newTab" in link && link.newTab ? "noopener" : undefined}
+                >
+                  {link.label} ↗
+                </a>
+              ))}
+            </nav>
+          </article>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+
 </BaseLayout>

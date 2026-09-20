@@ -1,0 +1,93 @@
+[
+  {
+    "title": "Adaptive Recurrence as Algorithmic Time for Length Generalization in Addition",
+    "authors": [
+      "Imran Ibrahimli",
+      "Stefan Wermter",
+      "Jae Hee Lee"
+    ],
+    "venue": "ICML 2026 · 2nd Workshop on Compositional Learning",
+    "date": "2026-07-11",
+    "primaryUrl": "https://openreview.net/forum?id=XW18V4H9sq",
+    "links": [
+      {
+        "label": "OpenReview",
+        "url": "https://openreview.net/forum?id=XW18V4H9sq"
+      },
+      {
+        "label": "PDF",
+        "url": "https://openreview.net/pdf?id=XW18V4H9sq"
+      },
+      {
+        "label": "Workshop",
+        "url": "https://compositional-learning.github.io/"
+      }
+    ]
+  },
+  {
+    "title": "Length Generalization on Multi-Digit Integer Addition with Transformers",
+    "authors": [
+      "Imran Ibrahimli"
+    ],
+    "type": "MSc thesis",
+    "venue": "University of Hamburg",
+    "date": "2024-01-01",
+    "primaryUrl": "/msc-thesis",
+    "links": [
+      {
+        "label": "Thesis PDF",
+        "url": "/msc-thesis",
+        "newTab": true
+      },
+      {
+        "label": "University record",
+        "url": "https://edoc.sub.uni-hamburg.de/informatik/frontdoor.php?la=en&source_opus=301"
+      }
+    ]
+  },
+  {
+    "title": "SatDM: Synthesizing Realistic Satellite Image with Semantic Layout Conditioning using Diffusion Models",
+    "authors": [
+      "Orkhan Baghirli",
+      "Hamid Askarov",
+      "Imran Ibrahimli",
+      "Ismat Bakhishov",
+      "Nabi Nabiyev"
+    ],
+    "venue": "International Astronautical Congress",
+    "date": "2023-09-28",
+    "primaryUrl": "https://arxiv.org/abs/2309.16812",
+    "links": [
+      {
+        "label": "arXiv",
+        "url": "https://arxiv.org/abs/2309.16812"
+      },
+      {
+        "label": "PDF",
+        "url": "https://arxiv.org/pdf/2309.16812"
+      }
+    ]
+  },
+  {
+    "title": "Greenhouse Segmentation on High-Resolution Optical Satellite Imagery using Deep Learning Techniques",
+    "authors": [
+      "Orkhan Baghirli",
+      "Imran Ibrahimli",
+      "Tarlan Mammadzada"
+    ],
+    "type": "Preprint",
+    "venue": "arXiv",
+    "date": "2020-07-22",
+    "primaryUrl": "https://arxiv.org/abs/2007.11222",
+    "links": [
+      {
+        "label": "arXiv",
+        "url": "https://arxiv.org/abs/2007.11222"
+      },
+      {
+        "label": "PDF",
+        "url": "https://arxiv.org/pdf/2007.11222"
+      }
+    ]
+  }
+]
